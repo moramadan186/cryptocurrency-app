@@ -8,19 +8,18 @@ import News from "./News";
 
 const { Title } = Typography;
 const HomePage = () => {
-  const { data, isFetching } = useGetCryptosQuery();
+  const { data, isFetching } = useGetCryptosQuery(100);
   if (isFetching) return <div>Loading...</div>;
   const globalStats = data?.data?.stats;
   console.log(globalStats);
-  const { Title } = Typography;
   return (
     <>
       <Title level={3} className="heading">
         Global Crypto Stats
       </Title>
-      <Row>
+      <Row  gutter={[32, 32]}>
         <Col span={12}>
-          <Statistic title="Total Cryptocurrencies" value={globalStats.total} />
+          <Statistic title="Total Cryptocurrencies" value={globalStats?.total} />
         </Col>
         <Col span={12}>
           <Statistic
@@ -55,7 +54,7 @@ const HomePage = () => {
           <Link to="/cryptocurrencies">Show More</Link>
         </Title>
       </div>
-      <Cryptocurrencies />
+      <Cryptocurrencies simplified />
       <div className="home-heading-container">
         <Title level={3} className="home-title">
           Latest Crypto News
@@ -64,7 +63,7 @@ const HomePage = () => {
           <Link to="/news">Show More</Link>
         </Title>
       </div>
-      <News />
+      <News simplified />
     </>
   );
 };
