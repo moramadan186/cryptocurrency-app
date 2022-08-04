@@ -5,11 +5,12 @@ import millify from "millify";
 import { useGetCryptosQuery } from "../services/cryptoApi";
 import Cryptocurrencies from "./Cryptocurrencies";
 import News from "./News";
+import Loader from "./Loader";
 
 const { Title } = Typography;
 const HomePage = () => {
   const { data, isFetching } = useGetCryptosQuery(100);
-  if (isFetching) return <div>Loading...</div>;
+  if (isFetching) return <Loader />;
   const globalStats = data?.data?.stats;
   console.log(globalStats);
   return (
@@ -17,9 +18,12 @@ const HomePage = () => {
       <Title level={3} className="heading">
         Global Crypto Stats
       </Title>
-      <Row  gutter={[32, 32]}>
+      <Row gutter={[32, 32]}>
         <Col span={12}>
-          <Statistic title="Total Cryptocurrencies" value={globalStats?.total} />
+          <Statistic
+            title="Total Cryptocurrencies"
+            value={globalStats?.total}
+          />
         </Col>
         <Col span={12}>
           <Statistic
